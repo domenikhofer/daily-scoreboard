@@ -1,0 +1,235 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #f2f5f7;
+    color: #3d4954;
+    font-family: "Lexend Deca", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+
+}
+
+.dot {
+    position: absolute;
+    background-color: #000000;
+    height: 6px;
+    width: 6px;
+    border-radius: 50%;
+}
+
+
+#background-container {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    position: fixed;
+    background-color: #f2f5f7;
+}
+
+
+.content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.title {
+    width: 100%;
+    text-align: center;
+    font-size: 40px;
+    font-weight: 600;
+}
+
+.card {
+    margin-top: 20px;
+    background-color: #fff;
+    height: 200px;
+    box-shadow: -1px 3px 8px -1px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    padding: 50px;
+    color: #3d4954;
+    width: 50%;
+    position: relative;
+}
+
+.startStop {
+    width: 100px;
+    display: block;
+    position: absolute;
+    bottom: -50px;
+    left: 50%;
+    translate: -50% 0;
+    cursor: pointer;
+}
+
+@keyframes rotate {
+    0% {
+        rotate: 0.1turn;
+        clip-path: polygon(50% 50%, 40% 100%, 60% 100%);
+    }
+
+    50% {
+
+        clip-path: polygon(50% 50%, 20% 100%, 80% 100%);
+
+    }
+
+    100% {
+        rotate: 1.1turn;
+        clip-path: polygon(50% 50%, 40% 100%, 60% 100%);
+
+    }
+}
+
+.startStop::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    left: 0;
+    width: 98px;
+    height: 98px;
+    background: black;
+    border-radius: 50%;
+    scale: 1.3;
+    clip-path: polygon(50% 50%, 40% 100%, 60% 100%);
+    background: radial-gradient(circle, rgba(157, 41, 34, 0) 0%, rgba(157, 41, 34, 0) 62%, rgba(157, 41, 34, 1) 63%, rgba(157, 41, 34, 1) 66%, rgba(157, 41, 34, 0) 67%);
+    animation: rotate 1.5s infinite linear both;
+    animation-play-state: paused;
+    opacity: 0;
+    transition: all .2s 1s ease-in-out;
+}
+
+.startStop.play::after {
+    animation-play-state: running;
+    opacity: 1
+}
+
+
+.startStop svg {
+    display: block;
+    transition: all .2s ease-in-out;
+    filter: drop-shadow(-1px 3px 8px rgb(0 0 0 / 0.3))
+}
+
+.startStop:hover svg {
+    filter: drop-shadow(-1px 3px 8px rgb(0 0 0 / 0.5))
+}
+
+
+.startStop svg path[fill="rgb(242,245,247)"] {
+    transition: all .2s ease-in-out;
+
+    filter: drop-shadow(-1px 3px 8px rgb(0 0 0 / 0.3))
+}
+
+.startStop:hover svg path[fill="rgb(242,245,247)"] {
+    filter: drop-shadow(-1px 3px 8px rgb(0 0 0 / 0.5))
+}
+
+.newTime {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    opacity: 1;
+    scale: 1.5;
+    transition: all 0.75s 1s ease-in-out;
+    transform-origin: center center;
+    box-shadow: -1px 3px 20px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ebedef;
+}
+
+.newTime.hidden{
+    opacity: 0;
+    scale: 0;
+}
+
+.newTime .title{
+    font-size: 60px;
+    font-weight: 500
+}
+
+@keyframes colorChange{
+    0%{
+        background: hsl(358, 91%, 53%);
+    }
+    20%{
+        background: hsl(189, 64%, 48%);
+
+    }
+    40%{
+        background: hsl(327, 59%, 53%);
+
+    }
+    60%{
+        background: hsl(31, 96%, 49%);
+
+    }
+    80%{
+        background: hsl(269, 44%, 50%);
+
+    }
+    100%{
+        background: hsl(358, 91%, 53%);
+
+    }
+}
+
+.newTime .badge{
+    position:absolute;
+    top: calc(50% - 45px);
+    left: 60%;
+    background: hsl(327, 59%, 53%);
+    border: 2px solid white;
+    padding: 5px 10px;
+    border-radius: 25px;
+    color:white;
+    rotate: 10deg;
+    font-size: 13px;
+    font-weight: 800;
+    animation: colorChange 3s  infinite ease-in-out ;
+    display:none;
+}
+
+.newTime.isRecord .badge{
+    display:block
+}
+
+
+.newTime canvas{
+    position:absolute;
+    inset: 0;
+    display:none;
+}
+
+.newTime.isRecord canvas{
+    display:block;
+}
+
+.record {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    font-size: 20px;
+    color: #8b939c;
+}
+
+.record .label{
+    width: 200px;
+}
+
+.divider {
+    content: "";
+    width: 100px;
+    height: 2px;
+    background-color: #67d4ea;
+    box-shadow: 0px -1px 5px 0px #67d4ea;
+    margin: 25px auto 25px auto;
+}
